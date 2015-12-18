@@ -33,6 +33,8 @@ public:
     std::string& getValue();
     std::map<std::string, std::string>& getFields();
 
+    bool fields_conflict(std::map<std::string, std::string> other_fields);
+
 private:
     std::string referenceID_;
     std::string value_;
