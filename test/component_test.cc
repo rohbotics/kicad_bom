@@ -22,7 +22,7 @@ TEST(component, component_3_argument_constrcutor_Test) {
     ASSERT_EQ("480", c.getValue());
 }
 
-TEST(component, component_field_equivalence_exact_Test) {
+TEST(component, component_field_conflict_exact_Test) {
     std::map<std::string,std::string> f1;
     f1["Vendor"] = "DigiKey";
     f1["PN"] = "1080-889-HSD";
@@ -37,11 +37,11 @@ TEST(component, component_field_equivalence_exact_Test) {
     f2["PN"] = "1080-889-HSD";
     f2["MPN"] = "4903-4DF-FD43S";
 
-    auto eqiv = c.fields_conflict(f2);
-    ASSERT_EQ(false, eqiv);
+    auto conflict = c.fields_conflict(f2);
+    ASSERT_EQ(false, conflict);
 }
 
-TEST(component, component_field_equivalence_other_more_Test) {
+TEST(component, component_field_conflict_other_more_Test) {
     std::map<std::string,std::string> f1;
     f1["Vendor"] = "DigiKey";
     f1["PN"] = "1080-889-HSD";
@@ -58,11 +58,11 @@ TEST(component, component_field_equivalence_other_more_Test) {
     f2["vpn2"] = "34-JHKJ-24367";
     f2["FDK"] = "REUJDFHDS-FDFIJDS";
 
-    auto eqiv = c.fields_conflict(f2);
-    ASSERT_EQ(false, eqiv);
+    auto conflict = c.fields_conflict(f2);
+    ASSERT_EQ(false, conflict);
 }
 
-TEST(component, component_field_equivalence_main_more_Test) {
+TEST(component, component_field_conflict_main_more_Test) {
     std::map<std::string,std::string> f1;
     f1["Vendor"] = "DigiKey";
     f1["PN"] = "1080-889-HSD";
@@ -80,11 +80,11 @@ TEST(component, component_field_equivalence_main_more_Test) {
     f2["MPN"] = "4903-4DF-FD43S";
 
 
-    auto eqiv = c.fields_conflict(f2);
-    ASSERT_EQ(false, eqiv);
+    auto conflict = c.fields_conflict(f2);
+    ASSERT_EQ(false, conflict);
 }
 
-TEST(component, component_field_equivalence_main_empty_Test) {
+TEST(component, component_field_conflict_main_empty_Test) {
     auto c = Component("R11", "480");
 
     std::map<std::string,std::string> f2;
@@ -93,6 +93,15 @@ TEST(component, component_field_equivalence_main_empty_Test) {
     f2["MPN"] = "4903-4DF-FD43S";
 
 
-    auto eqiv = c.fields_conflict(f2);
-    ASSERT_EQ(false, eqiv);
+    auto conflict = c.fields_conflict(f2);
+    ASSERT_EQ(false, conflict);
+}
+
+
+TEST(component, component_2_argument_constrcutor_equivilance_exact_Test) {
+    auto c1 = Component("R11", "480");
+    auto c2 = Component("R11", "480");
+    auto equiv = (c1==c2);
+
+    ASSERT_EQ(true, equiv);
 }

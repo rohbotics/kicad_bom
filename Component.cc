@@ -89,15 +89,25 @@ bool Component::fields_conflict(std::map<std::string, std::string>& other_fields
     return _fields_conflict(other_fields);
 }
 
+bool Component::operator==(Component& other) {
+    std::lock_guard<std::mutex> this_guard(*component_mutex_);
+    std::lock_guard<std::mutex> other_guard(*other.component_mutex_);
+
+    auto a = referenceID_ == other.referenceID_;
+    auto b = value_ == other.value_;
+    auto c = !_fields_conflict(other.fields_);
+    return (a && b && c);
+}
+
 bool Component::_fields_conflict(std::map<std::string, std::string>& other_fields) {
-    bool equivalent = true;
+    bool conflict = true;
 
     if (!fields_.empty()) {
         for (auto iter : fields_) {
             auto matching_field = other_fields.find(iter.first);
             if (matching_field != other_fields.end()) {
                 if (matching_field->second == iter.second) {
-                    equivalent = false;
+                    conflict = false;
                 }
                 else {
                     return true;
@@ -109,5 +119,5 @@ bool Component::_fields_conflict(std::map<std::string, std::string>& other_field
         return false;
     }
 
-    return equivalent;
+    return conflict;
 }
