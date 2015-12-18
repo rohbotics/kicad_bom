@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test/lib/gtest/googletest/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/gtest/googletest/cmake/internal_utils.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/component_test.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Component.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Component.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/kicad_bom.cc" isTestSource="false" />
