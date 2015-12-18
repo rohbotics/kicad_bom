@@ -84,8 +84,12 @@ void Component::printReferenceID() {
     std::cout << referenceID_ << std::endl;
 }
 
-bool Component::fields_conflict(std::map<std::string, std::string> other_fields) {
+bool Component::fields_conflict(std::map<std::string, std::string>& other_fields) {
     std::lock_guard<std::mutex> guard(*component_mutex_);
+    return _fields_conflict(other_fields);
+}
+
+bool Component::_fields_conflict(std::map<std::string, std::string>& other_fields) {
     bool equivalent = true;
 
     if (!fields_.empty()) {

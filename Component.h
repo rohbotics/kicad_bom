@@ -14,13 +14,11 @@
 class Component {
 public:
     Component(std::string referenceID, std::string value);
-
     Component(std::string referenceID, std::string value,
               std::map<std::string, std::string> fields);
 
+    // Copy and Move Constructors
     Component(const Component& other);
-
-
     Component& operator=(Component&& other);
 
     ~Component();
@@ -33,12 +31,14 @@ public:
     std::string& getValue();
     std::map<std::string, std::string>& getFields();
 
-    bool fields_conflict(std::map<std::string, std::string> other_fields);
+    bool fields_conflict(std::map<std::string, std::string>& other_fields);
 
 private:
     std::string referenceID_;
     std::string value_;
     std::map<std::string, std::string> fields_;
+
+    bool _fields_conflict(std::map<std::string, std::string>& other_fields);
 };
 
 
