@@ -15,6 +15,8 @@ class Component {
 public:
     Component(std::string referenceID, std::string value);
 
+    Component(std::string referenceID, std::string value, std::string footprint);
+
     Component(std::string referenceID, std::string value,
               std::map<std::string, std::string> fields);
 
@@ -39,6 +41,7 @@ public:
 private:
     std::string referenceID_;
     std::string value_;
+    std::string footprint_;
     std::map<std::string, std::string> fields_;
 
     bool _fields_conflict(std::map<std::string, std::string> &other_fields);
