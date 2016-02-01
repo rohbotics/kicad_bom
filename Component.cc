@@ -64,17 +64,17 @@ Component::~Component() {
     }
 }
 
-std::string &Component::getReferenceID() {
+std::string Component::getReferenceID() {
     std::lock_guard<std::mutex> guard(*component_mutex_);
     return referenceID_;
 }
 
-std::string &Component::getValue() {
+std::string Component::getValue() {
     std::lock_guard<std::mutex> guard(*component_mutex_);
     return value_;
 }
 
-std::map<std::string, std::string> &Component::getFields() {
+std::map<std::string, std::string> Component::getFields() {
     std::lock_guard<std::mutex> guard(*component_mutex_);
     return fields_;
 }
@@ -87,6 +87,11 @@ void Component::printReferenceID() {
 bool Component::fields_conflict(std::map<std::string, std::string>& other_fields) {
     std::lock_guard<std::mutex> guard(*component_mutex_);
     return _fields_conflict(other_fields);
+}
+
+bool Component::has_field(std::string field) {
+    std::lock_guard<std::mutex> guard(*component_mutex_);
+    return _has_field(std::ref(field));
 }
 
 bool Component::operator==(Component& other) {
@@ -120,4 +125,14 @@ bool Component::_fields_conflict(std::map<std::string, std::string>& other_field
     }
 
     return conflict;
+}
+
+bool Component::_has_field(std::string field) {
+    auto has = fields_.count(field);
+    if(has > 0){
+        return true;
+    }
+    else {
+        return false;
+    }
 }

@@ -38,7 +38,7 @@ TEST(component, component_field_conflict_exact_Test) {
     f2["MPN"] = "4903-4DF-FD43S";
 
     auto conflict = c.fields_conflict(f2);
-    ASSERT_EQ(false, conflict);
+    ASSERT_EQ(0, conflict);
 }
 
 TEST(component, component_field_conflict_other_more_Test) {
@@ -59,7 +59,7 @@ TEST(component, component_field_conflict_other_more_Test) {
     f2["FDK"] = "REUJDFHDS-FDFIJDS";
 
     auto conflict = c.fields_conflict(f2);
-    ASSERT_EQ(false, conflict);
+    ASSERT_EQ(0, conflict);
 }
 
 TEST(component, component_field_conflict_main_more_Test) {
@@ -81,7 +81,7 @@ TEST(component, component_field_conflict_main_more_Test) {
 
 
     auto conflict = c.fields_conflict(f2);
-    ASSERT_EQ(false, conflict);
+    ASSERT_EQ(0, conflict);
 }
 
 TEST(component, component_field_conflict_main_empty_Test) {
@@ -94,7 +94,7 @@ TEST(component, component_field_conflict_main_empty_Test) {
 
 
     auto conflict = c.fields_conflict(f2);
-    ASSERT_EQ(false, conflict);
+    ASSERT_EQ(0, conflict);
 }
 
 
@@ -103,5 +103,5 @@ TEST(component, component_2_argument_constrcutor_equivilance_exact_Test) {
     auto c2 = Component("R11", "480");
     auto equiv = (c1==c2);
 
-    ASSERT_EQ(true, equiv);
+    ASSERT_EQ(0, equiv);
 }

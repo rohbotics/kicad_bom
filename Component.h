@@ -26,13 +26,15 @@ public:
     Component(const Component &other);
     Component &operator=(Component &&other);
 
-    std::string &getReferenceID();
-    std::string &getValue();
-    std::map<std::string, std::string> &getFields();
+    std::string getReferenceID();
+    std::string getValue();
+    std::map<std::string, std::string> getFields();
 
     void printReferenceID();
 
     bool fields_conflict(std::map<std::string, std::string> &other_fields);
+
+    bool has_field(std::string field);
 
     bool operator==(Component& other);
 
@@ -45,6 +47,7 @@ private:
     std::map<std::string, std::string> fields_;
 
     bool _fields_conflict(std::map<std::string, std::string> &other_fields);
+    bool _has_field(std::string field);
 };
 
 
