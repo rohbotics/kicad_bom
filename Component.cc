@@ -126,7 +126,7 @@ bool Component::fields_conflict(std::map<std::string, std::string>& other_fields
 	return _fields_conflict(other_fields);
 }
 
-bool Component::has_field(std::string field) {
+bool Component::has_field(std::string field) const {
 	std::lock_guard<std::mutex> guard(*component_mutex_);
 	return _has_field(std::ref(field));
 }
@@ -141,7 +141,7 @@ std::string Component::get_field(std::string field) {
 		throw std::invalid_argument("Field: \"" + field + "\" does not exist");
 }
 
-bool Component::_fields_conflict(std::map<std::string, std::string>& other_fields) {
+bool Component::_fields_conflict(std::map<std::string, std::string>& other_fields) const{
 	bool conflict = true;
 
 	if (!fields_.empty()) {
@@ -164,7 +164,7 @@ bool Component::_fields_conflict(std::map<std::string, std::string>& other_field
 	return conflict;
 }
 
-bool Component::_has_field(std::string field) {
+bool Component::_has_field(std::string field) const {
 	auto has = fields_.count(field);
 	if(has > 0){
 		return true;

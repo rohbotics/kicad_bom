@@ -66,7 +66,7 @@ public:
     bool fields_conflict(std::map<std::string, std::string> &other_fields);
 
 	// Check if this Component has a field
-    bool has_field(std::string field);
+    bool has_field(std::string field) const;
 
 	std::string get_field(std::string field);
 
@@ -78,8 +78,8 @@ private:
     std::string footprint_;
     std::map<std::string, std::string> fields_;
 
-    bool _fields_conflict(std::map<std::string, std::string> &other_fields);
-    bool _has_field(std::string field);
+    bool _fields_conflict(std::map<std::string, std::string> &other_fields) const;
+    bool _has_field(std::string field) const;
 };
 
 
