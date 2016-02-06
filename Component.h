@@ -28,13 +28,17 @@ public:
     std::string getValue();
     std::map<std::string, std::string> getFields();
 
+	// Check equality between this Component and another
+	bool operator==(Component& other);
+
+	// Print Component Ref ID to cout
     void printReferenceID();
 
+	// Check for conflict between fields for components
     bool fields_conflict(std::map<std::string, std::string> &other_fields);
 
+	// Check if this Component has a field
     bool has_field(std::string field);
-
-    bool operator==(Component& other);
 
     std::mutex *component_mutex_ = nullptr;
 
