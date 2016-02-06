@@ -91,7 +91,7 @@ Component::~Component() {
 	}
 }
 
-std::string Component::getReferenceID() {
+std::string Component::get_reference_ID() {
 	std::lock_guard<std::mutex> guard(*component_mutex_);
 	return referenceID_;
 }
@@ -101,7 +101,7 @@ std::string Component::getValue() {
 	return value_;
 }
 
-std::map<std::string, std::string> Component::getFields() {
+std::map<std::string, std::string> Component::get_fields() {
 	std::lock_guard<std::mutex> guard(*component_mutex_);
 	return fields_;
 }

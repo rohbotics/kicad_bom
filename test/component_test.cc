@@ -38,7 +38,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 TEST(component_constructor, component_constructor_2_argument_Test) {
 	auto c = Component("R11", "480");
-	ASSERT_EQ("R11", c.getReferenceID());
+	ASSERT_EQ("R11", c.get_reference_ID());
 	ASSERT_EQ("480", c.getValue());
 }
 
@@ -48,8 +48,8 @@ TEST(component_constructor, component_constructor_3_argument_Test) {
 
 	auto c = Component("R11", "480", f);
 
-	ASSERT_EQ(f, c.getFields());
-	ASSERT_EQ("R11", c.getReferenceID());
+	ASSERT_EQ(f, c.get_fields());
+	ASSERT_EQ("R11", c.get_reference_ID());
 	ASSERT_EQ("480", c.getValue());
 }
 
@@ -62,8 +62,8 @@ TEST(component_constructor, component_constructor_3_argument_large_Test) {
 
 	auto c = Component("R11", "480", f);
 
-	ASSERT_EQ(f, c.getFields());
-	ASSERT_EQ("R11", c.getReferenceID());
+	ASSERT_EQ(f, c.get_fields());
+	ASSERT_EQ("R11", c.get_reference_ID());
 	ASSERT_EQ("480", c.getValue());
 }
 
@@ -104,7 +104,7 @@ TEST(component_field, component_field_conflict_exact_Test) {
 	f1["MPN"] = "4903-4DF-FD43S";
 
 	auto c = Component("R11", "480", f1);
-	ASSERT_EQ(f1,c.getFields());
+	ASSERT_EQ(f1, c.get_fields());
 
 
 	std::map<std::string,std::string> f2;
@@ -123,7 +123,7 @@ TEST(component_field, component_field_conflict_other_more_Test) {
 	f1["MPN"] = "4903-4DF-FD43S";
 
 	auto c = Component("R11", "480", f1);
-	ASSERT_EQ(f1,c.getFields());
+	ASSERT_EQ(f1, c.get_fields());
 
 
 	std::map<std::string,std::string> f2;
@@ -146,7 +146,7 @@ TEST(component_field, component_field_conflict_main_more_Test) {
 	f1["FDK"] = "REUJDFHDS-FDFIJDS";
 
 	auto c = Component("R11", "480", f1);
-	ASSERT_EQ(f1,c.getFields());
+	ASSERT_EQ(f1, c.get_fields());
 
 
 	std::map<std::string,std::string> f2;

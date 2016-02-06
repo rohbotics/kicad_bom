@@ -52,9 +52,9 @@ public:
     Component(const Component &other);
     Component &operator=(Component &&other);
 
-    std::string getReferenceID();
+    std::string get_reference_ID();
     std::string getValue();
-    std::map<std::string, std::string> getFields();
+    std::map<std::string, std::string> get_fields();
 
 	// Check equality between this Component and another
 	bool operator==(Component& other);
