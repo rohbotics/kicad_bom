@@ -15,8 +15,6 @@ class Component {
 public:
     Component(std::string referenceID, std::string value);
 
-    Component(std::string referenceID, std::string value, std::string footprint);
-
     Component(std::string referenceID, std::string value,
               std::map<std::string, std::string> fields);
 
