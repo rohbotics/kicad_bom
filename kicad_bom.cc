@@ -41,7 +41,7 @@ typedef std::vector<std::shared_ptr<Component>> ComponentSet;
 
 int main() {
 	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file("/home/rohan/cplus/kicad_bom/test_bom.xml");
+	pugi::xml_parse_result result = doc.load_file("/home/rohan/cplus/kicad_bom/QTC.xml");
 
 	auto component_list = doc.child("export").child("components");
 
@@ -70,9 +70,8 @@ int main() {
 	auto vendor_pn2components = std::make_shared<std::unordered_map<std::string, ComponentSet>>();
 	for(auto comp : comp_vector) {
 
-		if (comp->has_field("Vendor") && comp->has_field("PN")){
-			std::string key = comp->getFields().at("Vendor") + comp->getFields().at("PN");
-
+		try {
+			std::string key = comp->get_field("Vendor") + comp->get_field("PN");
 			if (vendor_pn2components->count(key)){
 				vendor_pn2components->at(key).push_back(comp);
 			}
@@ -83,6 +82,9 @@ int main() {
 				vendor_pn2components->insert(std::make_pair(key, cs));
 			}
 		}
+		catch (const std::invalid_argument& ia) {
+		}
+
 	}
 
 	for(auto cs : *vendor_pn2components) {
@@ -95,8 +97,8 @@ int main() {
 	auto manufacturer_mpn2components = std::make_shared<std::unordered_map<std::string, ComponentSet>>();
 	for(auto comp : comp_vector) {
 
-		if (comp->has_field("Manufacturer") && comp->has_field("MPN")){
-			std::string key = comp->getFields().at("Manufacturer") + comp->getFields().at("MPN");
+		try {
+			std::string key = comp->get_field("Manufacturer") + comp->get_field("MPN");
 
 			if (manufacturer_mpn2components->count(key)){
 				manufacturer_mpn2components->at(key).push_back(comp);
@@ -107,6 +109,8 @@ int main() {
 				cs.push_back(comp);
 				manufacturer_mpn2components->insert(std::make_pair(key, cs));
 			}
+		}
+		catch (const std::invalid_argument& ia) {
 		}
 	}
 

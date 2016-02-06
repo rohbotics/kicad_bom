@@ -37,6 +37,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 #include <map>
 #include <mutex>
+#include <stdexcept>
 
 class Component {
 public:
@@ -66,6 +67,8 @@ public:
 
 	// Check if this Component has a field
     bool has_field(std::string field);
+
+	std::string get_field(std::string field);
 
     std::mutex *component_mutex_ = nullptr;
 
