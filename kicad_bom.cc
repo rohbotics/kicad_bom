@@ -10,11 +10,12 @@ typedef std::vector<std::shared_ptr<Component>> ComponentSet;
 
 int main() {
 	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file("/home/rohan/cplus/kicad_bom/QTC.xml");
+	pugi::xml_parse_result result = doc.load_file("/home/rohan/cplus/kicad_bom/test_bom.xml");
 
 	auto component_list = doc.child("export").child("components");
 
 	ComponentSet comp_vector;
+
 
 	auto i = 0;
 	for (auto comp : component_list.children("comp")){
@@ -54,6 +55,31 @@ int main() {
 	}
 
 	for(auto cs : *vendor_pn2components) {
+		std::cout << cs.first << std::endl;
+		for(auto c : cs.second){
+			//c->printReferenceID();
+		}
+	}
+
+	auto manufacturer_mpn2components = std::make_shared<std::unordered_map<std::string, ComponentSet>>();
+	for(auto comp : comp_vector) {
+
+		if (comp->has_field("Manufacturer") && comp->has_field("MPN")){
+			std::string key = comp->getFields().at("Manufacturer") + comp->getFields().at("MPN");
+
+			if (manufacturer_mpn2components->count(key)){
+				manufacturer_mpn2components->at(key).push_back(comp);
+			}
+
+			else {
+				ComponentSet cs;
+				cs.push_back(comp);
+				manufacturer_mpn2components->insert(std::make_pair(key, cs));
+			}
+		}
+	}
+
+	for(auto cs : *manufacturer_mpn2components) {
 		std::cout << cs.first << std::endl;
 		for(auto c : cs.second){
 			//c->printReferenceID();

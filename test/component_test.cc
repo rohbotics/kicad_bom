@@ -103,5 +103,5 @@ TEST(component, component_2_argument_constrcutor_equivilance_exact_Test) {
     auto c2 = Component("R11", "480");
     auto equiv = (c1==c2);
 
-    ASSERT_EQ(0, equiv);
+    ASSERT_EQ(1, equiv);
 }
